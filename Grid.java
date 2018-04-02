@@ -8,17 +8,21 @@ public class Grid {
   private int[][]  values;
 
   /**
-   * Constructs an object Grid
-   * Transforms a string array into two dimensional int array]
+   * Construct an object Grid
+   * Transform a string array into two dimensional int array
+   * Note that the Object must have a two dimensional array instance named values
    * @param  rows string array
    */
   public Grid(String[] rows) {
-    // constructs two dimensional int array size of 9 x 9
+    // construct two dimensional int array size of 9 x 9
     values = new int[9][9];
-    for (int j=0; j<9; j++) {
+    for (int j = 0; j < 9; j++) {
+    	// copy a string in the index of j
       String row = rows[j];
+      // convert and copy string to a character array
       char[] charray = row.toCharArray();
-      for (int i=0; i<9; i++) {
+      for (int i = 0; i < 9; i++) {
+      	// copy a char in the index of i
         char ch = charray[i];
         if (ch != '.')
           values[j][i] = ch - '0';
@@ -29,11 +33,16 @@ public class Grid {
     }
   }
 
-
+  /**
+   * convert two dimensional int array into string and
+   * returns a string converted from int array
+   * Note that the Object must have a two dimensional array instance named values
+   * @return s a string converted from the two dimensional int array
+   */
   public String toString() {
     String s = "";
-    for (int j=0; j<9; j++) {
-      for (int i=0; i<9; i++) {
+    for (int j = 0; j < 9; j++) {
+      for (int i = 0; i < 9; i++) {
         int n = values[j][i];
         if (n == 0)
           s += '.';
@@ -44,15 +53,16 @@ public class Grid {
     }
     return s;
   }
-
-
-  //
-  // Copy ctor. Duplicates its source. call this 9 times in next9Grids.
-  //
+  
+  /**
+   * Copy constructor. Duplicate its values
+   * This will be called 9 times in next9Grids() method
+   * @param  src existing Grid object
+   */
   Grid(Grid src) {
     values = new int[9][9];
-    for (int j=0; j<9; j++)
-      for (int i=0; i<9; i++)
+    for (int j = 0; j < 9; j++)
+      for (int i = 0; i < 9; i++)
         values[j][i] = src.values[j][i];
   }
 
@@ -99,7 +109,7 @@ public class Grid {
   /**
    * Checks every rows, columns, and blocks are legal
    * Row, column, or block is legal when there is no repeated number between 1 - 9
-   * Note that the Object must have a two dimensional array instance named grid.
+   * Note that the Object must have a two dimensional array instance named values
    */
   public boolean isLegal() {
     int count4row    = 0;
@@ -127,7 +137,7 @@ public class Grid {
     int[] block = new int[9];
     for (int i = 3; i <= 9; i = i + 3) {
       for (int j = 3; j <= 9; j = j + 3) {
-        block = nthBlockToLinear(i, j);
+        block = TwoDArrayToLinear(i, j);
         if (containsNonZeroRepeat(block) == true)
           count4block++;
       }
