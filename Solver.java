@@ -4,24 +4,33 @@ import java.util.*;
 
 
 public class Solver {
-  private Grid           problem;
+	// instance variables
+  private Grid             problem;
   private ArrayList<Grid>  solutions;
 
+  /**
+   * constructs an object Solver and
+   * initialize its instance variable problem with the given variable
+   * @param  problem Grid variable problem
+   */
   public Solver(Grid problem) {
     this.problem = problem;
   }
 
-
+  /**
+   * concstrucs an object Solver,
+   * initialize its instance variable solutions with an empty ArrayList, and
+   * call an method solveRecure() by passing its instance variable problem
+   */
   public void solve() {
     solutions = new ArrayList<>();
     solveRecurse(problem);
   }
 
-
-  //
-  //
-  // Standard backtracking recursive solver.
-  //
+  /**
+   * standard backtracking recursive solver
+   * @param grid Grid object
+   */
   private void solveRecurse(Grid grid) {
     Evaluation eval = evaluate(grid);
 
@@ -44,12 +53,13 @@ public class Solver {
     }
   }
 
-  //
-  //
-  // Returns Evaluation.ABANDON if the grid is illegal.
-  // Returns ACCEPT if the grid is legal and complete.
-  // Returns CONTINUE if the grid is legal and incomplete.
-  //
+  /**
+   * evaluate grid depending on Evaluation enum
+   * @param  grid [description]
+   * @return ABANDON if the grid is illegal
+   *         ACCEPT if the grid is legal and complete
+   *         CONTINUE if the grid is legal and imcomplete
+   */
   public Evaluation evaluate(Grid grid) {
     if (!grid.isLegal())
       return Evaluation.ABANDON;
@@ -59,10 +69,17 @@ public class Solver {
       return Evaluation.CONTINUE;
   }
 
+  /**
+   * get solutions that the current class Solver contains
+   * @return solutions
+   */
   public ArrayList<Grid> getSolutions() {
     return solutions;
   }
 
+  /**
+   * tests to see if the current class Solver works
+   */
   public static void main(String[] args) {
     Grid g = TestGridSupplier.getPuzzle1();    // or any other puzzle
     Solver solver = new Solver(g);
@@ -71,6 +88,5 @@ public class Solver {
     for (int i = 0; i < solver.getSolutions().size(); i++) {
       System.out.println(solver.getSolutions().get(i));
     }
-    // Print out your solution, or test if it equals() the solution in TestGridSupplier.
   }
 }

@@ -26,7 +26,7 @@ public class Grid {
         char ch = charray[i];
         if (ch != '.')
           values[j][i] = ch - '0';
-          // int value is assigned
+          // int value is copied
           // int value = '3' - '0';
           // Then, the variable value stores 3 as its value
       }
@@ -40,10 +40,12 @@ public class Grid {
    * @return s a string converted from the two dimensional int array
    */
   public String toString() {
+  	// declare an empty string variable s
     String s = "";
-    for (int j = 0; j < 9; j++) {
-      for (int i = 0; i < 9; i++) {
-        int n = values[j][i];
+    for (int row = 0; row < 9; row++) {
+      for (int col = 0; col < 9; col++) {
+      	// copy the value corresponding to row and col
+        int n = values[row][col];
         if (n == 0)
           s += '.';
         else
@@ -66,14 +68,12 @@ public class Grid {
         values[j][i] = src.values[j][i];
   }
 
-
-  //
-  //
-  //
-  // Finds an empty member of values[][].
-  // Returns an array list of 9 grids that look like the current grid,
-  // except the empty member contains 1, 2, 3 .... 9.
-  // Returns null if the current grid is full.
+  /**
+   * Find an empty member of values
+   * Note that the Object must have a two dimensional array instance named values
+   * @return grids  an ArrayList of 9 grids that are the same as the current grid
+   *         null   if the current grid is full
+   */
   public ArrayList<Grid> next9Grids() {
     int xOfNextEmptyCell = -1;
     int yOfNextEmptyCell = -1;
@@ -173,7 +173,12 @@ public class Grid {
     return linearArray;
   }
 
-  // cost can be saved by using Set
+  /**
+   * see if the given array value contains repeated number between 1 - 9
+   * @param   value an array value of size 9
+   * @return  true if it contains number that is repeated
+   *          false otherwise
+   */
   public boolean containsNonZeroRepeat(int[] value) {
     // int count = 0;
     for (int i = 0; i < 8; i++) {
@@ -185,10 +190,11 @@ public class Grid {
     return true;
   }
 
-  //
-  //
-  // Returns true if every cell member of values[][] is a digit from 1-9.
-  //
+  /**
+   * see if the instance variable values is full
+   * @return true if the 9 x 9 grid is full
+   *         false otherwise
+   */
   public boolean isFull() {
     boolean isFull = false;
     for(int i = 0; i < 9; i++) {
@@ -202,12 +208,12 @@ public class Grid {
     return true;
   }
 
-
-  //
-  //
-  // Returns true if x is a Grid and, for every (i,j),
-  // x.values[i][j] == this.values[i][j].
-  //
+  /**
+   * see if the given object is the same as the current object Grid
+   * @param  x Object variable
+   * @return   true if x is a Grid and for every (i, j) x.values[i][j] == this.values[i][j]
+   *           false otherwise
+   */
   public boolean equals(Object x) {
     boolean equiv = false;
     int countEqual = 0;
