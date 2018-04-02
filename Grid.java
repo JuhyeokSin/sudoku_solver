@@ -3,8 +3,8 @@ package sudoku;
 import java.util.*;
 
 public class Grid {
-	// instance variable values
-	// values represents 9 x 9 grid
+  // instance variable values
+  // values represents 9 x 9 grid
   private int[][]  values;
 
   /**
@@ -17,12 +17,12 @@ public class Grid {
     // construct two dimensional int array size of 9 x 9
     values = new int[9][9];
     for (int j = 0; j < 9; j++) {
-    	// copy a string in the index of j
+      // copy a string in the index of j
       String row = rows[j];
       // convert and copy string to a character array
       char[] charray = row.toCharArray();
       for (int i = 0; i < 9; i++) {
-      	// copy a char in the index of i
+        // copy a char in the index of i
         char ch = charray[i];
         if (ch != '.')
           values[j][i] = ch - '0';
