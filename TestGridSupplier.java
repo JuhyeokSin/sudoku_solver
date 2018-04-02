@@ -7,28 +7,19 @@ package sudoku;
 public class TestGridSupplier 
 {
 	//
-	// A simple puzzle and its solution. Took less than 1 second on my MacBook Pro. 
+	// A simple puzzle and its solution.
 	//
 	private final static String[]		PUZZLE_1 =
 	{
-//		"..3.1.5..",
-//		"8..395..1",
-//		"15.....27",
-//		".8..7..5.",
-//		"62.9.4.13",
-//		".9..2..7.",
-//		"91.....34",
-//		"2..748..9",
-//		"..6.3.2.."
-			"2....18.4",
-			"4.579..21",
-			"6..5.4...",
-			"3.8.7...2",
-			"12..4.5.6",
-			"59428.7..",
-			".1.4..2.5",
-			"942..31..",
-			"...9.243."
+		"..3.1.5..",
+		"8..395..1",
+		"15.....27",
+		".8..7..5.",
+		"62.9.4.13",
+		".9..2..7.",
+		"91.....34",
+		"2..748..9",
+		"..6.3.2.."
 	};    
 	
 	
@@ -115,10 +106,6 @@ public class TestGridSupplier
 	static Grid getPuzzle3()		{ return new Grid(PUZZLE_3); }
 	static Grid getSolution3()		{ return new Grid(SOLUTION_3); }
 	
-	
-	//
-	// You can use these to test your Grid's evaluate() method.
-	//
 	private final static String[]		REJECT_1 =
 	{
 		"11.......",

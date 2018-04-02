@@ -5,9 +5,8 @@ import java.util.*;
 
 public class Solver
 {
-	private Grid						problem;
-	private ArrayList<Grid>				solutions;
-
+	private Grid	 		    problem;
+	private ArrayList<Grid>  solutions;
 
 	public Solver(Grid problem)
 	{

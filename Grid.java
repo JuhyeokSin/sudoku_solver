@@ -2,27 +2,22 @@ package sudoku;
 
 import java.util.*;
 
+public class Grid {
+	// instance variable values
+	// values represents 9 x 9 grid
+	private int[][]	values;
 
-public class Grid
-{
-	private int[][]						values;
-
-
-	//
-	//
-	// Constructs a Grid instance from a string[] as provided by TestGridSupplier.
-	// See TestGridSupplier for examples of input.
-	// Dots in input strings represent 0s in values[][].
-	//
-	public Grid(String[] rows)
-	{
+	/**
+   * Constructs an object Grid
+   * Transforms a string array into two dimensional int array]
+   * @param  rows [description]
+   */
+	public Grid(String[] rows) {
 		values = new int[9][9];
-		for (int j=0; j<9; j++)
-		{
+		for (int j=0; j<9; j++) {
 			String row = rows[j];
 			char[] charray = row.toCharArray();
-			for (int i=0; i<9; i++)
-			{
+			for (int i=0; i<9; i++) {
 				char ch = charray[i];
 				if (ch != '.')
 					values[j][i] = ch - '0';
@@ -34,13 +29,10 @@ public class Grid
 	}
 
 
-	public String toString()
-	{
+	public String toString() {
 		String s = "";
-		for (int j=0; j<9; j++)
-		{
-			for (int i=0; i<9; i++)
-			{
+		for (int j=0; j<9; j++) {
+			for (int i=0; i<9; i++) {
 				int n = values[j][i];
 				if (n == 0)
 					s += '.';
@@ -56,8 +48,7 @@ public class Grid
 	//
 	// Copy ctor. Duplicates its source. call this 9 times in next9Grids.
 	//
-	Grid(Grid src)
-	{
+	Grid(Grid src) {
 		values = new int[9][9];
 		for (int j=0; j<9; j++)
 			for (int i=0; i<9; i++)
@@ -72,33 +63,7 @@ public class Grid
 	// Returns an array list of 9 grids that look like the current grid,
 	// except the empty member contains 1, 2, 3 .... 9.
 	// Returns null if the current grid is full.
-	// Don’t change “this” grid. Build 9 new grids.
-	//
-	//
-	// Example: if this grid = 1........
-	//                         .........
-	//                         .........
-	//                         .........
-	//                         .........
-	//                         .........
-	//                         .........
-	//                         .........
-	//                         .........
-	//
-	// Then the returned array list would contain:
-	//
-	// 11.......          12.......          13.......          14.......    and so on     19.......
-	// .........          .........          .........          .........                  .........
-	// .........          .........          .........          .........                  .........
-	// .........          .........          .........          .........                  .........
-	// .........          .........          .........          .........                  .........
-	// .........          .........          .........          .........                  .........
-	// .........          .........          .........          .........                  .........
-	// .........          .........          .........          .........                  .........
-	// .........          .........          .........          .........                  .........
-	//
-	public ArrayList<Grid> next9Grids()
-	{
+	public ArrayList<Grid> next9Grids() {
 		int xOfNextEmptyCell = -1;
 		int yOfNextEmptyCell = -1;
 
@@ -130,14 +95,12 @@ public class Grid
 	}
 
 
-	//
-	// COMPLETE THIS
-	//
-	// Returns true if this grid is legal. A grid is legal if no row, column, or
-	// 3x3 block contains a repeated 1, 2, 3, 4, 5, 6, 7, 8, or 9.
-	//
-	public boolean isLegal()
-	{
+	/**
+	 * Checks every rows, columns, and blocks are legal
+	 * Row, column, or block is legal when there is no repeated number between 1 - 9
+	 * Note that the Object must have a two dimensional array instance named grid.
+	 */
+	public boolean isLegal() {
 		int count4row    = 0;
 		int count4column = 0;
 		int count4block  = 0;
@@ -173,17 +136,32 @@ public class Grid
 	}
 
 
-	 public int[] nthBlockToLinear(int r, int c) {
-		int[] block = new int[9];
-		int i = 0;
-		for (int j = r - 3; j < r; j++) {
-			for (int k = c - 3; k < c; k++) {
-				block[i] = values[j][k];
-				i++;
+	/**
+	 * linearizes a two dimensional array that is 3 x 3 grid into an one dimensional array
+	 * ---
+	 * Transform a two dimensional grid into a linear array.
+	 * Note that the Object must have a two dimensional array instance named values.
+	 * ---
+	 * @param  offsetRow offset of row to extract from the values
+	 * @param  offsetCol offset of column to extract from the values
+	 * @return           a linear array
+	 */
+	public int[] TwoDArrayToLinear(int offsetRow, int offsetCol) {
+		// declare an array linearized, size of 9
+		int[] linearArray = new int[9];
+		int index = 0;
+
+		for (int row = offsetRow - 3; row < offsetRow; row++) {
+			for (int col = offsetCol - 3; col < offsetCol; col++) {
+				// copy the value at [row][col] position
+				// to the linearArray
+				linearArray[index] = this.values[row][col];
+				index++;
 			}
 		}
-		return block;
-	 }
+		return linearArray;
+	}
+
 	// cost can be saved by using Set
 	public boolean containsNonZeroRepeat(int[] value) {
 		// int count = 0;
@@ -200,8 +178,7 @@ public class Grid
 	//
 	// Returns true if every cell member of values[][] is a digit from 1-9.
 	//
-	public boolean isFull()
-	{
+	public boolean isFull() {
 		boolean isFull = false;
 		for(int i = 0; i < 9; i++) {
 			if (values[i][0] < 1 || values[i][0] > 9)
@@ -220,8 +197,7 @@ public class Grid
 	// Returns true if x is a Grid and, for every (i,j),
 	// x.values[i][j] == this.values[i][j].
 	//
-	public boolean equals(Object x)
-	{
+	public boolean equals(Object x) {
 		boolean equiv = false;
 		int countEqual = 0;
 		Grid that = (Grid)x;
@@ -237,26 +213,13 @@ public class Grid
 		return equiv;
 	}
 
+	/**
+	 * main method to test the current class Grid
+	 */
 	public static void main(String[] args) {
 		Grid grid1 = new Grid(TestGridSupplier.getSolution1());
 		Grid grid2 = new Grid(TestGridSupplier.getPuzzle2());
 		System.out.println("Is grid1 full? " + grid1.isFull());
 		System.out.println("Is grid2 full? " + grid2.isFull());
-//		System.out.println(grid1.equals(grid2));
-//		System.out.println(grid1.equals(grid1));
-//		System.out.println();
-//		System.out.println(grid1.isLegal());
-//		System.out.println(grid2.next9Grids().get(8));
-//		System.out.println(grid2.next9Grids().get(1));
-//		for (Grid member : grid2.next9Grids()) {
-//			for (int i = 0; i < 9; i++) {
-//				for (int j = 0; j < 9; j++) {
-//					System.out.print(member.values[i][j]);
-//				}
-//				System.out.println();
-//			}
-//			System.out.println();
-//			System.out.println();
-//		}
 	}
 }
